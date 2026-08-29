@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#05060b">
+  <meta name="description" content="Code Mavericks — original apps and games built with attitude.">
+  <meta property="og:title" content="Code Mavericks">
+  <meta property="og:description" content="Original apps, games and experiments from Code Mavericks.">
+  <meta property="og:image" content="/assets/code-mavericks-logo.jpg">
+  <title>Code Mavericks — Apps & Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="background" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a href="#home" class="brand" aria-label="Code Mavericks home">
+        <img src="/assets/code-mavericks-logo.jpg" alt="Code Mavericks logo">
+        <span>CODE MAVERICKS</span>
+      </a>
+      <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#releases">Releases</a>
+        <a href="#games">Games</a>
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+        <a href="#support">Support</a>
+      </div>
+      <a class="mini-cta desktop-only" href="#releases">Explore</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-art">
+        <img src="/assets/code-mavericks-logo.jpg" alt="">
+      </div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <div class="eyebrow">INDEPENDENT APP & GAME STUDIO</div>
+        <h1>Build different.<br><span>Play different.</span></h1>
+        <p>Code Mavericks is where original apps, story-driven games and weird little experiments become real products.</p>
+        <div class="hero-buttons">
+          <a class="button primary" href="#releases">See the releases</a>
+          <a class="button secondary" href="#about">Meet the studio</a>
+        </div>
+        <div class="trust-row">
+          <div><strong>4</strong><span>Active projects</span></div>
+          <div><strong>Stripe</strong><span>Secure web checkout</span></div>
+          <div><strong>iOS + Web</strong><span>Built for modern players</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="releases">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">LATEST BUILDS</div>
+          <h2>Releases from the workshop.</h2>
+        </div>
+        <p>Games, apps and experiments — all under one roof.</p>
+      </div>
+      <div class="release-grid" id="releaseGrid"></div>
+    </section>
+
+    <section class="section showcase" id="games">
+      <div class="showcase-copy">
+        <div class="eyebrow">FLAGSHIP GAME</div>
+        <h2>Steampunk Chronicles</h2>
+        <p>A story-led turn-based RPG full of gears, beasts, unlikely heroes and cinematic battles.</p>
+        <div class="chips">
+          <span>Turn-based combat</span><span>Story campaign</span><span>Capturable beasts</span><span>Comic style</span>
+        </div>
+        <button class="button primary detail-button" data-id="steampunk-chronicles">View game</button>
+      </div>
+      <div class="showcase-art">
+        <div class="big-title">STEAMPUNK<br>CHRONICLES</div>
+        <div class="gear gear-a">⚙</div>
+        <div class="gear gear-b">⚙</div>
+      </div>
+    </section>
+
+    <section class="section" id="apps">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">APPS</div>
+          <h2>Useful software with personality.</h2>
+        </div>
+      </div>
+      <div class="split-card">
+        <div class="split-art">
+          <div class="app-word">LITERALLY<br>ILLITERATE</div>
+        </div>
+        <div class="split-copy">
+          <div class="status">AVAILABLE</div>
+          <h3>Make better words stick.</h3>
+          <p>Vocabulary, comprehension and creative expression wrapped in a quick, replayable word game.</p>
+          <button class="button primary detail-button" data-id="literally-illiterate">View app</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section principles" id="about">
+      <div>
+        <div class="eyebrow">ABOUT CODE MAVERICKS</div>
+        <h2>Indie by design.</h2>
+      </div>
+      <div class="principle-grid">
+        <article><strong>01</strong><h3>Original first</h3><p>Every project starts with a strong idea, not a copy of whatever is already popular.</p></article>
+        <article><strong>02</strong><h3>Built to feel good</h3><p>Fast interfaces, satisfying feedback and clear design matter just as much as features.</p></article>
+        <article><strong>03</strong><h3>Small studio energy</h3><p>Fewer layers, faster iteration and direct feedback from the people actually using the product.</p></article>
+      </div>
+    </section>
+
+    <section class="section support" id="support">
+      <div>
+        <div class="eyebrow">SUPPORT</div>
+        <h2>Need a hand?</h2>
+        <p>Questions about a game, purchase or account? Use the support form and keep your order email handy if your question is about a payment.</p>
+      </div>
+      <form id="supportForm" class="support-form">
+        <label>Name<input name="name" required placeholder="Your name"></label>
+        <label>Email<input name="email" type="email" required placeholder="you@example.com"></label>
+        <label>Product
+          <select name="product">
+            <option>General enquiry</option>
+            <option>Steampunk Chronicles</option>
+            <option>Literally Illiterate</option>
+            <option>Number Outlaw</option>
+            <option>Maverick Utility Lab</option>
+          </select>
+        </label>
+        <label>Message<textarea name="message" rows="5" required placeholder="How can we help?"></textarea></label>
+        <button class="button primary" type="submit">Send support request</button>
+      </form>
+    </section>
+
+    <section class="section newsletter">
+      <div>
+        <div class="eyebrow">NEW RELEASES</div>
+        <h2>Join the Maverick list.</h2>
+        <p>Launch notes, beta invites and new release announcements. No nonsense.</p>
+      </div>
+      <form id="newsletterForm">
+        <input type="email" required placeholder="you@example.com" aria-label="Email address">
+        <button class="button primary" type="submit">Join</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand brand">
+      <img src="/assets/code-mavericks-logo.jpg" alt="">
+      <span>CODE MAVERICKS</span>
+    </div>
+    <p>© <span id="year"></span> Code Mavericks. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="mailto:hello@codemavericks.dev">Contact</a>
+    </div>
+  </footer>
+
+  <dialog id="productDialog">
+    <button class="dialog-close" aria-label="Close">×</button>
+    <div id="dialogBody"></div>
+  </dialog>
+
+  <div class="cookie" id="cookieBanner">
+    <p>We use essential cookies for checkout and site functionality. Optional analytics can be added later.</p>
+    <button id="cookieAccept">Got it</button>
+  </div>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
