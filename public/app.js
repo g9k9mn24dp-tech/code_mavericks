@@ -10,7 +10,7 @@ const stripePaymentLinks = {
 const allProducts = () => [...state.catalog.apps, ...state.catalog.games];
 
 async function init(){
-  const res = await fetch("/catalog.json");
+  const res = await fetch("/data/catalog.json");
   state.catalog = await res.json();
 
   const grid = document.querySelector("#releaseGrid");
