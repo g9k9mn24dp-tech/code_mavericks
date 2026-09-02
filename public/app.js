@@ -44,7 +44,18 @@ function productCard(p){
 function wireEvents(){
   document.addEventListener("click", (e) => {
     const detail = e.target.closest(".detail-button");
-    if(detail) openProduct(detail.dataset.id);
+
+if (detail) {
+  const product = allProducts().find(
+    p => p.id === detail.dataset.id
+  );
+
+  if (product?.url) {
+    window.location.href = product.url;
+  } else {
+    openProduct(detail.dataset.id);
+  }
+}
 
     const buy = e.target.closest(".buy-button");
     if(buy) startCheckout(buy.dataset.id);
