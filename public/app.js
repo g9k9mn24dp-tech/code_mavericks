@@ -15,6 +15,10 @@ async function init(){
 
   const grid = document.querySelector("#releaseGrid");
   grid.innerHTML = allProducts().map(productCard).join("");
+  const projectCount = document.querySelector("#projectCount");
+if (projectCount) {
+  projectCount.textContent = allProducts().length;
+}
   document.querySelector("#year").textContent = new Date().getFullYear();
 
   const checkout = new URLSearchParams(location.search).get("checkout");
