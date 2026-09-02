@@ -35,7 +35,9 @@ function productCard(p){
       <p>${p.description}</p>
       <div class="card-footer">
         <strong>${p.price}</strong>
-        <button class="button secondary detail-button" data-id="${p.id}">View details</button>
+        <button class="button secondary detail-button" data-id="${p.id}">
+  ${p.url ? "Open App" : "View details"}
+</button>
       </div>
     </div>
   </article>`;
