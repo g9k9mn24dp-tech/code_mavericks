@@ -90,14 +90,10 @@
         <label>Name<input name="name" required placeholder="Your name"></label>
         <label>Email<input name="email" type="email" required placeholder="you@example.com"></label>
         <label>Product
-          <select name="product">
- <select name="product">
-  <option>General enquiry</option>
-  <option>Literally Illiterate</option>
-  <option>StillSpace</option>
-</select>
-          </select>
-        </label>
+  <select name="product" id="productSelect">
+    <option value="">General enquiry</option>
+  </select>
+</label>
         <label>Message<textarea name="message" rows="5" required placeholder="How can we help?"></textarea></label>
         <button class="button primary" type="submit">Send support request</button>
       </form>
