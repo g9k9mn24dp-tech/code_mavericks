@@ -52,8 +52,10 @@ dialog{width:min(760px,calc(100% - 28px));border:1px solid var(--line);border-ra
 .release-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .release-art {
