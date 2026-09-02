@@ -19,7 +19,17 @@ async function init(){
 if (projectCount) {
   projectCount.textContent = allProducts().length;
 }
-  document.querySelector("#year").textContent = new Date().getFullYear();
+const productSelect = document.querySelector("#productSelect");
+if (productSelect) {
+  allProducts().forEach(product => {
+    const option = document.createElement("option");
+    option.value = product.id;
+    option.textContent = product.name;
+    productSelect.appendChild(option);
+  });
+}
+
+document.querySelector("#year").textContent = new Date().getFullYear();
 
   const checkout = new URLSearchParams(location.search).get("checkout");
   if(checkout === "success") showToast("Payment complete — thank you!");
