@@ -20,57 +20,22 @@
       ]
     },
     {
-      "id": "utility-lab",
-      "name": "Maverick Utility Lab",
-      "category": "Productivity",
-      "tagline": "Small tools. Zero clutter.",
-      "description": "A growing collection of practical micro-tools and experiments from Code Mavericks, built to be fast, clean and useful.",
-      "price": "Free",
-      "status": "Beta",
-      "accent1": "#18f0ba",
-      "accent2": "#1976ff",
-      "features": [
-        "Fast utilities",
-        "Simple interface",
-        "No bloated dashboards",
-        "Frequent experiments"
-      ]
-    }
-  ],
-  "games": [
-    {
-      "id": "steampunk-chronicles",
-      "name": "Steampunk Chronicles",
-      "category": "Turn-Based RPG",
-      "tagline": "A world of gears, aether and rebellion.",
-      "description": "A story-rich steampunk RPG with tactical turn-based combat, multiple heroes, character backstories, capturable beasts, special attacks and comic-book styled cinematic moments.",
-      "price": "\u00a34.99",
-      "status": "In Development",
-      "accent1": "#10d7ff",
-      "accent2": "#f21ee7",
-      "features": [
-        "Turn-based combat",
-        "Playable hero roster",
-        "Capturable beasts",
-        "Story-driven campaign"
-      ]
-    },
-    {
-      "id": "number-outlaw",
-      "name": "Number Outlaw",
-      "category": "Math Puzzle",
-      "tagline": "Quick maths. Big streaks. No mercy.",
-      "description": "An arcade-style number game built around rapid puzzles, streaks, score chasing and escalating challenge.",
-      "price": "\u00a31.99",
-      "status": "Coming Soon",
-      "accent1": "#ff9a2a",
-      "accent2": "#ff2a8f",
-      "features": [
-        "Quick-fire rounds",
-        "Score streaks",
-        "Difficulty ramp",
-        "Daily challenges"
-      ]
-    }
+  "id": "stillspace",
+  "name": "StillSpace",
+  "category": "Mental Wellness",
+  "tagline": "Find your calm. Anytime, anywhere.",
+  "description": "Your personal sanctuary for mental wellness, offering guided practices for focus, sleep, stress relief and anxiety management to help you find balance every day.",
+  "price": "Free",
+  "status": "Available",
+  "url": "https://small-serene-mind-flow.base44.app",
+  "image": "/StillSpace.jpeg",
+  "accent1": "#45e6dc",
+  "accent2": "#8d63ff",
+  "features": [
+    "Guided relaxation",
+    "Sleep support",
+    "Stress relief",
+    "Focus and mindfulness"
   ]
 }
+
