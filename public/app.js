@@ -26,9 +26,13 @@ async function init(){
 
 function productCard(p){
   return `<article class="release-card">
-    <div class="release-art" style="--a:${p.accent1};--b:${p.accent2}">
-      <strong>${p.name}</strong>
-    </div>
+   <div class="release-art" style="--a:${p.accent1};--b:${p.accent2}">
+  ${
+    p.image
+      ? `<img src="${p.image}" alt="${p.name}" class="release-image">`
+      : `<strong>${p.name}</strong>`
+  }
+</div>
     <div class="release-body">
       <div class="meta"><span>${p.category}</span><span>${p.status}</span></div>
       <h3>${p.tagline}</h3>
