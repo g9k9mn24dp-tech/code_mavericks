@@ -110,7 +110,9 @@ function openProduct(id){
     <div class="feature-list">${p.features.map(f=>`<span>✓ ${f}</span>`).join("")}</div>
     <div class="buy-row">
       <div><div class="eyebrow">PRICE</div><strong>${p.price}</strong></div>
-      <button class="button primary buy-button" data-id="${p.id}">${p.price==="Free" ? "Open / Download" : "Buy securely"}</button>
+      <button class="button primary buy-button" data-id="${p.id}">
+  ${p.url ? "Open App" : (p.price === "Free" ? "Open / Download" : "Buy securely")}
+</button>
     </div>`;
   document.querySelector("#productDialog").showModal();
 }
@@ -118,6 +120,10 @@ function openProduct(id){
 async function startCheckout(id){
   const p = allProducts().find(x=>x.id===id);
   if(!p) return;
+  if (p.url) {
+  window.location.href = p.url;
+  return;
+}
   if(p.price === "Free"){
     showToast("Add your App Store or web-app URL for this free release.");
     return;
