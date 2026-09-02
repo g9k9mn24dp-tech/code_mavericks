@@ -7,9 +7,10 @@
       "tagline": "Grow your vocabulary without the homework vibe.",
       "description": "A fast, playful vocabulary game built around meaning, comprehension and creative expression. Designed for short daily sessions, streaks, challenges and progressively harder language.",
       "price": "\u00a32.99",
-      "status": "Available",
-      "accent1": "#18d9ff",
-      "accent2": "#7a49ff",
+"status": "Available",
+"url": "https://read-bright-verse.base44.app",
+"accent1": "#18d9ff",
+"accent2": "#7a49ff",
       "features": [
         "Vocabulary challenges",
         "Comprehension rounds",
