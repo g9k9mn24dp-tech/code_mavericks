@@ -62,18 +62,83 @@ app.post("/api/create-checkout-session", async (req,res)=>{
   }
 });
 
-// Optional placeholders: connect these to Resend/Mailchimp/etc.
-app.post("/api/newsletter", (req,res)=>{
-  if(!req.body?.email) return res.status(400).json({error:"Email required"});
-  console.log("Newsletter signup:", req.body.email);
-  res.json({ok:true});
+async function sendEmail({ subject, text }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const supportEmail =
+    process.env.SUPPORT_EMAIL || "codemavericks2706@outlook.com";
+
+  if (!apiKey) {
+    console.error("RESEND_API_KEY is not configured");
+    return false;
+  }
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: "Code Mavericks <onboarding@resend.dev>",
+      to: [supportEmail],
+      subject,
+      text
+    })
+  });
+
+  if (!response.ok) {
+    console.error("Email error:", await response.text());
+    return false;
+  }
+
+  return true;
+}
+
+app.post("/api/newsletter", async (req, res) => {
+  const email = req.body?.email;
+
+  if (!email) {
+    return res.status(400).json({ error: "Email required" });
+  }
+
+  const sent = await sendEmail({
+    subject: "New Maverick List signup",
+    text: `New newsletter signup:
+
+${email}`
+  });
+
+  if (!sent) {
+    return res.status(500).json({ error: "Could not send signup notification" });
+  }
+
+  res.json({ ok: true });
 });
 
-app.post("/api/support", (req,res)=>{
-  const {name,email,message} = req.body || {};
-  if(!name || !email || !message) return res.status(400).json({error:"Missing fields"});
-  console.log("Support request:", req.body);
-  res.json({ok:true});
+app.post("/api/support", async (req, res) => {
+  const { name, email, product, message } = req.body || {};
+
+  if (!name || !email || !message) {
+    return res.status(400).json({ error: "Missing fields" });
+  }
+
+  const sent = await sendEmail({
+    subject: `Code Mavericks support request - ${product || "General enquiry"}`,
+    text: `New support request
+
+Name: ${name}
+Email: ${email}
+Product: ${product || "General enquiry"}
+
+Message:
+${message}`
+  });
+
+  if (!sent) {
+    return res.status(500).json({ error: "Could not send support request" });
+  }
+
+  res.json({ ok: true });
 });
 
 app.get("/health", (_req,res)=>res.json({ok:true}));
