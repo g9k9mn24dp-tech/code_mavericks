@@ -41,3 +41,24 @@
 ],
 "games": []
 }
+{
+  "id": "dont-do-that",
+  "name": "Don't Do That",
+  "category": "Game",
+  "tagline": "Do the opposite. Pick the wrong answer. Break every rule.",
+  "description": "A chaotic rule-breaking game where doing the wrong thing is exactly the right thing. Take on challenges, compete head-to-head, climb the leaderboard and unlock new ways to play.",
+  "price": "Free",
+  "status": "Available",
+  "url": "https://do-opposite-play.base44.app",
+  "image": "/assets/Dont-Do-That.jpeg",
+  "accent1": "#ff3b30",
+  "accent2": "#ff9500",
+  "features": [
+    "Daily challenges",
+    "Head-to-head battles",
+    "Global leaderboards",
+    "Player progression",
+    "Coin shop",
+    "Premium themes and effects"
+  ]
+}
