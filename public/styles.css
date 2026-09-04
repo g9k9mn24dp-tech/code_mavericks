@@ -61,3 +61,27 @@ dialog{width:min(760px,calc(100% - 28px));border:1px solid var(--line);border-ra
 .release-art {
   overflow: hidden;
 }
+/* Release card action buttons */
+.card-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.card-actions .detail-button {
+  background: linear-gradient(120deg, var(--cyan), var(--purple));
+  color: #05060b;
+  border-color: transparent;
+  font-weight: 800;
+}
+
+.card-actions .detail-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.card-actions a.button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
