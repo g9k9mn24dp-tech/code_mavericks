@@ -52,11 +52,16 @@ function productCard(p){
       <h3>${p.tagline}</h3>
       <p>${p.description}</p>
       <div class="card-footer">
-        <strong>${p.price}</strong>
-        <button class="button secondary detail-button" data-id="${p.id}">
-  ${p.url ? "Open App" : "View details"}
-</button>
-      </div>
+  <strong>${p.price}</strong>
+
+  <div class="card-actions">
+    ${p.page ? `<a class="button secondary" href="${p.page}">Learn more</a>` : ""}
+
+    <button class="button secondary detail-button" data-id="${p.id}">
+      ${p.url ? "Open App" : "View details"}
+    </button>
+  </div>
+</div>
     </div>
   </article>`;
 }
