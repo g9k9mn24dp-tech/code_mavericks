@@ -8,8 +8,10 @@ const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SEC
 
 const prices = {
   "literally-illiterate": process.env.STRIPE_PRICE_LITERALLY,
-  "steampunk-chronicles": process.env.STRIPE_PRICE_STEAMPUNK,
-  "number-outlaw": process.env.STRIPE_PRICE_NUMBER_OUTLAW
+
+  "dungeon-adventurer-pack": process.env.STRIPE_PRICE_DUNGEON_ADVENTURER,
+  "dungeon-campaign-pack": process.env.STRIPE_PRICE_DUNGEON_CAMPAIGN,
+  "dungeon-founders-pack": process.env.STRIPE_PRICE_DUNGEON_FOUNDERS
 };
 
 // Stripe webhook must use raw body before express.json().
