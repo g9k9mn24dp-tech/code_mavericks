@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dungeon Realm Online - Purchase Complete</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, #2b2117 0%, #111 38%, #050505 100%);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: min(680px, 100%);
+      background: rgba(13, 16, 24, 0.96);
+      border: 1px solid rgba(218, 166, 72, 0.35);
+      border-radius: 24px;
+      padding: 34px;
+      box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 24px 70px rgba(0,0,0,.55);
+    }
+
+    .eyebrow {
+      color: #d8a448;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(34px, 7vw, 56px);
+      margin: 14px 0;
+    }
+
+    p {
+      color: #c9c9cf;
+      line-height: 1.65;
+      font-size: 18px;
+    }
+
+    .status {
+      margin: 28px 0;
+      padding: 18px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      border: 0;
+      border-radius: 14px;
+      padding: 16px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #111;
+      background: linear-gradient(135deg, #d8a448, #f3d27b);
+    }
+
+    .button[hidden] {
+      display: none;
+    }
+
+    .error {
+      color: #ffb7b7;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="eyebrow">Code Mavericks</div>
+
+    <h1>Dungeon Realm Online</h1>
+
+    <div id="status" class="status">
+      Verifying your payment...
+    </div>
+
+    <p id="message">
+      Please wait while we confirm your £4.99 purchase with Stripe.
+    </p>
+
+    <a
+      id="playButton"
+      class="button"
+      href="#"
+      hidden
+    >
+      Play Dungeon Realm
+    </a>
+  </main>
+
+  <script>
+    async function verifyPurchase() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get("session_id");
+
+      const status = document.getElementById("status");
+      const message = document.getElementById("message");
+      const playButton = document.getElementById("playButton");
+
+      if (!sessionId) {
+        status.textContent = "Purchase verification failed";
+        status.classList.add("error");
+        message.textContent =
+          "No Stripe checkout session was found. Please return to Code Mavericks and try again.";
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `/api/verify-checkout-session?session_id=${encodeURIComponent(sessionId)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.paid) {
+          throw new Error("Payment not verified");
+        }
+
+        status.textContent = "Payment confirmed ✓";
+        message.textContent =
+          "Thank you. Your Dungeon Realm Online purchase has been verified.";
+
+        playButton.href = "https://dungeon-realm-play.base44.app";
+        playButton.hidden = false;
+
+      } catch (error) {
+        console.error(error);
+
+        status.textContent = "Purchase verification failed";
+        status.classList.add("error");
+
+        message.textContent =
+          "We couldn't verify this payment. If you were charged, please contact Code Mavericks support.";
+      }
+    }
+
+    verifyPurchase();
+  </script>
+</body>
+</html>
