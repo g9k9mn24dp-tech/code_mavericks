@@ -50,8 +50,8 @@ app.post("/api/create-checkout-session", async (req,res)=>{
     const session = await stripe.checkout.sessions.create({
       mode:"payment",
       line_items:[{price,quantity:1}],
-      success_url:`${origin}/?checkout=success`,
-      cancel_url:`${origin}/?checkout=cancelled`,
+      success_url: `${origin}/purchase-success.html?session_id={CHECKOUT_SESSION_ID}`,
+cancel_url: `${origin}/?checkout=cancelled`,
       allow_promotion_codes:true,
       metadata:{productId}
     });
@@ -59,6 +59,39 @@ app.post("/api/create-checkout-session", async (req,res)=>{
   }catch(err){
     console.error(err);
     res.status(500).json({error:"Could not start checkout"});
+  }
+});
+app.get("/api/verify-checkout-session", async (req, res) => {
+  if (!stripe) {
+    return res.status(503).json({ error: "Stripe not configured" });
+  }
+
+  const sessionId = req.query.session_id;
+
+  if (!sessionId) {
+    return res.status(400).json({ error: "Missing session_id" });
+  }
+
+  try {
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+    const paid =
+      session.payment_status === "paid" &&
+      session.metadata?.productId === "dungeon-realm-online";
+
+    if (!paid) {
+      return res.status(403).json({ paid: false });
+    }
+
+    res.json({
+      paid: true,
+      productId: session.metadata.productId,
+      customerEmail:
+        session.customer_details?.email || session.customer_email || null
+    });
+  } catch (err) {
+    console.error("Checkout verification failed:", err);
+    res.status(500).json({ error: "Could not verify payment" });
   }
 });
 
