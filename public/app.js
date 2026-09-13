@@ -134,10 +134,16 @@ function openProduct(id){
     </div>
     <div class="feature-list">${p.features.map(f=>`<span>✓ ${f}</span>`).join("")}</div>
     <div class="buy-row">
-      <div><div class="eyebrow">PRICE</div><strong>${p.price}</strong></div>
-      <button class="button primary buy-button" data-id="${p.id}">
-  ${p.url ? "Open App" : (p.price === "Free" ? "Open / Download" : "Buy securely")}
-</button>
+  <div><div class="eyebrow">PRICE</div><strong>${p.price}</strong></div>
+
+  ${
+    p.status === "Coming Soon"
+      ? `<button class="button primary" disabled>Coming Soon</button>`
+      : `<button class="button primary buy-button" data-id="${p.id}">
+          ${p.url ? "Open App" : (p.price === "Free" ? "Open / Download" : "Buy securely")}
+        </button>`
+  }
+</div>
     </div>`;
   document.querySelector("#productDialog").showModal();
 }
