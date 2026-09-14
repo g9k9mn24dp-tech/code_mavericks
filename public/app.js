@@ -1,6 +1,9 @@
 
 const state = { catalog: { apps: [], games: [] } };
 
+const launchParams = new URLSearchParams(window.location.search);
+const dungeonRealmUserId = launchParams.get("user_id");
+
 const stripePaymentLinks = {
   // Fastest Stripe setup:
   // "literally-illiterate": "https://buy.stripe.com/...",
@@ -164,11 +167,26 @@ async function startCheckout(id){
     return;
   }
   try{
-    const res = await fetch("/api/create-checkout-session", {
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({productId:id})
-    });
+    const payload = {
+  productId: id
+};
+
+if (id === "dungeon-realm-online") {
+  if (!dungeonRealmUserId) {
+    showToast("Please sign in to Dungeon Realm before purchasing.");
+    return;
+  }
+
+  payload.userId = dungeonRealmUserId;
+}
+
+const res = await fetch("/api/create-checkout-session", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+});
     const data = await res.json();
     if(!res.ok || !data.url) throw new Error(data.error || "Checkout unavailable");
     location.href = data.url;
