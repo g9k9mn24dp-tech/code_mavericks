@@ -43,7 +43,12 @@ app.use(express.static("public", { extensions: ["html"] }));
 app.post("/api/create-checkout-session", async (req,res)=>{
   if(!stripe) return res.status(503).json({error:"Stripe not configured"});
   const productId = req.body?.productId;
-  const price = prices[productId];
+const userId = req.body?.userId;
+const price = prices[productId];
+
+if (productId === "dungeon-realm-online" && !userId) {
+  return res.status(400).json({ error: "Dungeon Realm user ID required" });
+}
   if(!price) return res.status(400).json({error:"No Stripe Price ID configured for this product"});
   try{
     const origin = `${req.protocol}://${req.get("host")}`;
@@ -53,7 +58,10 @@ app.post("/api/create-checkout-session", async (req,res)=>{
       success_url: `${origin}/purchase-success.html?session_id={CHECKOUT_SESSION_ID}`,
 cancel_url: `${origin}/?checkout=cancelled`,
       allow_promotion_codes:true,
-      metadata:{productId}
+      metadata:{
+  productId,
+  userId: userId || ""
+}
     });
     res.json({url:session.url});
   }catch(err){
@@ -83,12 +91,51 @@ app.get("/api/verify-checkout-session", async (req, res) => {
       return res.status(403).json({ paid: false });
     }
 
-    res.json({
-      paid: true,
-      productId: session.metadata.productId,
-      customerEmail:
-        session.customer_details?.email || session.customer_email || null
-    });
+    const userId = session.metadata?.userId;
+
+if (!userId) {
+  return res.status(400).json({
+    error: "No Dungeon Realm user ID attached to this purchase"
+  });
+}
+
+const entitlementResponse = await fetch(
+  "https://dungeon-realm-play.base44.app/functions/activateWebEntitlement",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CM-Secret": process.env.CODE_MAVEN_VERIFICATION_TOKEN
+    },
+    body: JSON.stringify({
+      userId,
+      sessionId: session.id
+    })
+  }
+);
+
+if (!entitlementResponse.ok) {
+  const entitlementError = await entitlementResponse.text();
+
+  console.error(
+    "Dungeon Realm entitlement activation failed:",
+    entitlementResponse.status,
+    entitlementError
+  );
+
+  return res.status(502).json({
+    error: "Payment verified but game ownership could not be activated"
+  });
+}
+
+res.json({
+  paid: true,
+  entitlementActivated: true,
+  productId: session.metadata.productId,
+  userId,
+  customerEmail:
+    session.customer_details?.email || session.customer_email || null
+});
   } catch (err) {
     console.error("Checkout verification failed:", err);
     res.status(500).json({ error: "Could not verify payment" });
