@@ -4,8 +4,6 @@ const state = { catalog: { apps: [], games: [] } };
 const launchParams = new URLSearchParams(window.location.search);
 const dungeonRealmUserId = launchParams.get("user_id");
 
-const autoBuyProduct = launchParams.get("buy");
-
 const stripePaymentLinks = {
   // Fastest Stripe setup:
   // "literally-illiterate": "https://buy.stripe.com/...",
@@ -41,11 +39,6 @@ document.querySelector("#year").textContent = new Date().getFullYear();
   if(checkout === "cancelled") showToast("Checkout cancelled. Nothing was charged.");
 
   wireEvents();
-if (
-  autoBuyProduct === "dungeon-realm-online" &&
-  dungeonRealmUserId
-) {
-  await startCheckout("dungeon-realm-online");
 }
 
 function productCard(p){
