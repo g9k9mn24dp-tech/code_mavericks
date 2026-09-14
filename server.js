@@ -40,6 +40,54 @@ app.post("/api/stripe-webhook", express.raw({type:"application/json"}), (req,res
 app.use(express.json());
 app.use(express.static("public", { extensions: ["html"] }));
 
+app.get("/buy/dungeon-realm", async (req, res) => {
+  if (!stripe) {
+    return res.status(503).send("Stripe is not configured");
+  }
+
+  const userId = req.query.user_id;
+
+  if (!userId) {
+    return res.status(400).send("Missing Dungeon Realm user ID");
+  }
+
+  const price = prices["dungeon-realm-online"];
+
+  if (!price) {
+    return res.status(500).send("Dungeon Realm price is not configured");
+  }
+
+  try {
+    const origin = `${req.protocol}://${req.get("host")}`;
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [
+        {
+          price,
+          quantity: 1
+        }
+      ],
+
+      success_url:
+        `${origin}/purchase-success.html?session_id={CHECKOUT_SESSION_ID}`,
+
+      cancel_url:
+        "https://dungeon-realm-play.base44.app",
+
+      metadata: {
+        productId: "dungeon-realm-online",
+        base44UserId: userId
+      }
+    });
+
+    return res.redirect(303, session.url);
+  } catch (err) {
+    console.error("Dungeon Realm checkout failed:", err);
+    return res.status(500).send("Could not start Dungeon Realm checkout");
+  }
+});
+
 app.post("/api/create-checkout-session", async (req,res)=>{
   if(!stripe) return res.status(503).json({error:"Stripe not configured"});
   const productId = req.body?.productId;
