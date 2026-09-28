@@ -170,9 +170,17 @@ function openProduct(id){
 async function startCheckout(id){
   const p = allProducts().find(x=>x.id===id);
   if(!p) return;
-  if (p.url) {
-  window.location.href = p.url;
-  return;
+  if (product?.url) {
+  if (typeof gtag === "function" && product.url.includes("apps.apple.com")) {
+    gtag("event", "app_store_click", {
+      app_name: product.name,
+      product_id: product.id,
+      destination_url: product.url
+    });
+  }
+
+  window.location.href = product.url;
+}  return;
 }
   if(p.price === "Free"){
     showToast("Add your App Store or web-app URL for this free release.");
