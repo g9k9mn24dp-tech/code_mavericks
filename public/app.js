@@ -10,7 +10,19 @@ const stripePaymentLinks = {
   // "steampunk-chronicles": "https://buy.stripe.com/..."
 };
 
-const allProducts = () => [...state.catalog.apps, ...state.catalog.games];
+const allProducts = () => {
+  const products = [...state.catalog.apps, ...state.catalog.games];
+  const order = [
+    "literally-illiterate",
+    "dont-do-that",
+    "stillspace",
+    "dungeon-realm-online"
+  ];
+
+  return products.sort(
+    (a, b) => order.indexOf(a.id) - order.indexOf(b.id)
+  );
+};
 
 async function init(){
   const res = await fetch("/catalog.json");
