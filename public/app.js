@@ -91,7 +91,11 @@ if (detail) {
   );
 
   if (product?.url) {
-    window.location.href = product.url;
+  if (product.url.includes("apps.apple.com")) {
+    console.log("App Store click:", product.id, product.url);
+  }
+
+  window.location.href = product.url;
   } else {
     openProduct(detail.dataset.id);
   }
