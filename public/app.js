@@ -61,7 +61,7 @@ function productCard(p){
     ${p.page ? `<a class="button secondary" href="${p.page}">Learn more</a>` : ""}
 
     <button class="button secondary detail-button" data-id="${p.id}">
-      ${p.url ? "Open App" : "View details"}
+      ${p.url ? "Download App" : "View details"}
     </button>
   </div>
 </div>
