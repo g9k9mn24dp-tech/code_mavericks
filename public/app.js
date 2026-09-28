@@ -25,7 +25,7 @@ const allProducts = () => {
 };
 
 async function init(){
-  const res = await fetch("/catalog.json");
+  const res = await fetch("/catalog.json?v=20260928-1");
   state.catalog = await res.json();
 
   const grid = document.querySelector("#releaseGrid");
