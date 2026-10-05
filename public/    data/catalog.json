@@ -1,21 +1,23 @@
 {
   "apps": [
     {
-      "id": "literally-illiterate",
-      "name": "Literally Illiterate",
-      "category": "Word Game",
-      "tagline": "Grow your vocabulary without the homework vibe.",
-      "description": "A fast, playful vocabulary game built around meaning, comprehension and creative expression. Designed for short daily sessions, streaks, challenges and progressively harder language.",
-      "price": "\u00a32.99",
+      "id": "stillspace",
+      "name": "Stillspace",
+      "category": "Wellness",
+      "tagline": "Find a little space for yourself.",
+      "description": "A calm personal wellness app with guided practices for focus, sleep, stress relief and everyday balance.",
+      "price": "Free",
       "status": "Available",
-      "url": "https://read-bright-verse.base44.app",
-      "accent1": "#18d9ff",
-      "accent2": "#7a49ff",
+      "url": "/stillspace.html",
+      "accent1": "#7c6cff",
+      "accent2": "#55c7d9",
       "features": [
-        "Vocabulary challenges",
-        "Comprehension rounds",
-        "Creative word play",
-        "Progress tracking"
+        "Guided relaxation",
+        "Focus practices",
+        "Sleep support",
+        "Stress relief",
+        "Calming daily routines",
+        "Simple distraction-free design"
       ]
     },
     {
@@ -23,7 +25,7 @@
       "name": "Maverick Utility Lab",
       "category": "Productivity",
       "tagline": "Small tools. Zero clutter.",
-      "description": "A growing collection of practical micro-tools and experiments from Code Mavericks, built to be fast, clean and useful.",
+      "description": "A growing collection of practical micro-tools and experiments from Code Mavericks.",
       "price": "Free",
       "status": "Beta",
       "accent1": "#18f0ba",
@@ -38,12 +40,56 @@
   ],
   "games": [
     {
+      "id": "dont-do-that",
+      "name": "Don't Do That",
+      "category": "Reverse Logic Arcade",
+      "tagline": "Do the opposite. Pick the wrong answer. Break every rule.",
+      "description": "A fast-paced reverse-logic arcade game where good instincts are bad decisions. Pick the wrong answer, master chaotic game modes, complete daily missions, collect Bomb Crew characters, customise your game and challenge your friends.",
+      "price": "Free",
+      "status": "Available",
+      "url": "/dont-do-that.html",
+      "accent1": "#ff8a2b",
+      "accent2": "#ff2fa8",
+      "features": [
+        "Reverse-logic challenges",
+        "Multiple arcade game modes",
+        "Chaos Grid",
+        "Simon Says... Don't",
+        "Daily challenges and missions",
+        "Head-to-Head multiplayer",
+        "Bomb Crew collection",
+        "Themes and customisation",
+        "XP, coins and reward progression"
+      ]
+    },
+    {
+      "id": "literally-illiterate",
+      "name": "Literally Illiterate",
+      "category": "Word Game",
+      "tagline": "Think you know words? Think again.",
+      "description": "A playful word game packed with vocabulary challenges, story-based gameplay, word puzzles and fast rounds designed to test what you really know.",
+      "price": "Free",
+      "status": "Available",
+      "url": "/literally-illiterate.html",
+      "accent1": "#18d9ff",
+      "accent2": "#7a49ff",
+      "features": [
+        "Vocabulary challenges",
+        "Word Circle mode",
+        "Story mode",
+        "Comprehension rounds",
+        "Creative word play",
+        "Progress tracking",
+        "Leaderboards and rewards"
+      ]
+    },
+    {
       "id": "steampunk-chronicles",
       "name": "Steampunk Chronicles",
       "category": "Turn-Based RPG",
       "tagline": "A world of gears, aether and rebellion.",
-      "description": "A story-rich steampunk RPG with tactical turn-based combat, multiple heroes, character backstories, capturable beasts, special attacks and comic-book styled cinematic moments.",
-      "price": "\u00a34.99",
+      "description": "A story-rich steampunk RPG with tactical turn-based combat, multiple heroes, capturable beasts and a cinematic adventure.",
+      "price": "£4.99",
       "status": "In Development",
       "accent1": "#10d7ff",
       "accent2": "#f21ee7",
@@ -51,6 +97,8 @@
         "Turn-based combat",
         "Playable hero roster",
         "Capturable beasts",
+        "Character backstories",
+        "Special attacks",
         "Story-driven campaign"
       ]
     },
@@ -59,8 +107,8 @@
       "name": "Number Outlaw",
       "category": "Math Puzzle",
       "tagline": "Quick maths. Big streaks. No mercy.",
-      "description": "An arcade-style number game built around rapid puzzles, streaks, score chasing and escalating challenge.",
-      "price": "\u00a31.99",
+      "description": "An arcade-style number game built around rapid puzzles, score chasing, streaks and increasingly difficult challenges.",
+      "price": "£1.99",
       "status": "Coming Soon",
       "accent1": "#ff9a2a",
       "accent2": "#ff2a8f",
