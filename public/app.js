@@ -53,12 +53,7 @@ const allProducts = () => {
 
 async function init() {
   try {
-    /*
-      IMPORTANT:
-      catalog.json is stored in public/data/catalog.json,
-      therefore the browser URL is /data/catalog.json
-    */
-    const res = await fetch("/data/catalog.json?v=20261005-2", {
+    const res = await fetch("/catalog.json?v=20261005-3", {
       cache: "no-store"
     });
 
@@ -94,12 +89,8 @@ async function init() {
       `;
     }
 
-    /*
-      Still wire non-catalogue events so navigation,
-      cookies and forms continue working.
-    */
-    wireEvents();
     updateYear();
+    wireEvents();
   }
 }
 
@@ -252,17 +243,11 @@ function productCard(p) {
 ========================================================= */
 
 function wireEvents() {
-  /*
-    Use one global click listener.
-    Guard against duplicate registration.
-  */
-
   if (!document.body.dataset.cmEventsWired) {
     document.body.dataset.cmEventsWired = "1";
 
     document.addEventListener("click", event => {
 
-      /* Product details / App Store button */
       const detail = event.target.closest(".detail-button");
 
       if (detail) {
@@ -274,7 +259,6 @@ function wireEvents() {
 
         if (product.url) {
           trackAppStoreClick(product);
-
           window.location.href = product.url;
           return;
         }
@@ -284,7 +268,6 @@ function wireEvents() {
       }
 
 
-      /* Buy button inside modal */
       const buy = event.target.closest(".buy-button");
 
       if (buy) {
@@ -293,7 +276,6 @@ function wireEvents() {
       }
 
 
-      /* Cookie banner */
       if (event.target.closest("#cookieAccept")) {
         localStorage.setItem("cm-cookie-ok", "1");
 
@@ -309,7 +291,6 @@ function wireEvents() {
   }
 
 
-  /* Product dialog */
   const dialog = document.querySelector("#productDialog");
   const dialogClose = document.querySelector(".dialog-close");
 
@@ -322,7 +303,6 @@ function wireEvents() {
   }
 
 
-  /* Mobile menu */
   const menuBtn = document.querySelector(".menu-btn");
   const navLinks = document.querySelector(".nav-links");
 
@@ -351,7 +331,6 @@ function wireEvents() {
   }
 
 
-  /* Newsletter */
   const newsletterForm =
     document.querySelector("#newsletterForm");
 
@@ -368,7 +347,6 @@ function wireEvents() {
   }
 
 
-  /* Support form */
   const supportForm =
     document.querySelector("#supportForm");
 
@@ -385,7 +363,6 @@ function wireEvents() {
   }
 
 
-  /* Cookie state */
   const cookie =
     document.querySelector("#cookieBanner");
 
@@ -579,20 +556,13 @@ async function startCheckout(id) {
   if (!product) return;
 
 
-  /*
-    Free products or products with an external URL
-  */
   if (product.url) {
     trackAppStoreClick(product);
-
     window.location.href = product.url;
     return;
   }
 
 
-  /*
-    Free item but no URL
-  */
   if (product.price === "Free") {
     showToast(
       "This release does not currently have a download link."
@@ -602,9 +572,6 @@ async function startCheckout(id) {
   }
 
 
-  /*
-    Direct Stripe Payment Link
-  */
   if (stripePaymentLinks[id]) {
     window.location.href =
       stripePaymentLinks[id];
@@ -613,18 +580,12 @@ async function startCheckout(id) {
   }
 
 
-  /*
-    Server-created Stripe Checkout session
-  */
   try {
     const payload = {
       productId: id
     };
 
 
-    /*
-      Dungeon Realm requires logged-in Base44 user id
-    */
     if (id === "dungeon-realm-online") {
 
       if (!dungeonRealmUserId) {
